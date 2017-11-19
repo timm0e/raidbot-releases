@@ -1,0 +1,38 @@
+version: "3"
+
+networks:
+  raidbot:
+
+services:
+  raidbot-redis:
+    build: ./raidbot-redis/
+    volumes: 
+      - ./data/:/mnt/RaidBot/
+    networks:
+      - raidbot
+  
+  raidbot-web:
+    build: ./raidbot-web/
+    volumes: 
+      - ./data/:/mnt/RaidBot/
+    ports:
+      - 80:3000
+    networks:
+      - raidbot
+    depends_on:
+      - raidbot-redis
+    environment:
+      - RAIDBOT_REDIS_HOST=raidbot-redis
+      - NODE_ENV=production
+
+  
+  raidbot-discord:
+    build: ./raidbot-discord/
+    volumes: 
+      - ./data/:/mnt/RaidBot/
+    networks:
+      - raidbot
+    depends_on:
+      - raidbot-redis
+    environment:
+      - RAIDBOT_REDIS_HOST=raidbot-redis

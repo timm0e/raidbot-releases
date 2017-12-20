@@ -10,7 +10,7 @@ services:
       - ./data/:/mnt/RaidBot/
     networks:
       - raidbot
-      restart:
+    restart:
       - always
   
   raidbot-web:

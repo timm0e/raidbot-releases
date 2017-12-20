@@ -10,8 +10,7 @@ services:
       - ./data/:/mnt/RaidBot/
     networks:
       - raidbot
-    restart:
-      - always
+    restart: always
   
   raidbot-web:
     build: ./raidbot-web/
@@ -26,8 +25,7 @@ services:
     environment:
       - RAIDBOT_REDIS_HOST=raidbot-redis
       - NODE_ENV=production
-    restart:
-      - always
+    restart: always
   
   raidbot-discord:
     build: ./raidbot-discord/
@@ -39,5 +37,4 @@ services:
       - raidbot-redis
     environment:
       - RAIDBOT_REDIS_HOST=raidbot-redis
-    restart:
-      - always
+    restart: always
